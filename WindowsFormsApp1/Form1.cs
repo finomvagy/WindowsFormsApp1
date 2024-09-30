@@ -18,6 +18,13 @@ namespace WindowsFormsApp1
             InitializeComponent();
             db = new databaseHandler();
             db.readaAll();
+            car onecar = new car();
+            onecar.color = "piros";
+            onecar.make = "vw";
+            onecar.hp = 500;
+            onecar.model = "Bogar";
+            onecar.year = 1973;
+            db.Addone(onecar);
         }
     }
 }

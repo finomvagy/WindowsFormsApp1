@@ -23,7 +23,17 @@ namespace WindowsFormsApp1
             string dbname = "Trabant";
           
             string connectdtring = $"username = {username};password = {password}; host = {host};database = {dbname}";
-            connection = new MySqlConnection(connectdtring);
+            connection = new MySqlConnection(connectdtring);                           
+        }
+        public void Addone(car onecar)
+        {
+            connection.Open();
+            string querry = $"insert into {tablename} (make,model,color,year,power) values('{onecar.make}','{onecar.model}','{onecar.color}','{onecar.year}','{onecar.hp}')";
+            MySqlCommand command = new MySqlCommand(querry,connection);
+            command.ExecuteNonQuery();
+            command.Dispose();
+            connection.Close();
+            MessageBox.Show("sikerult hozzaadni");
         }
         public void readaAll()
         {
@@ -61,5 +71,25 @@ namespace WindowsFormsApp1
                 MessageBox.Show(e.Message,"error:");
             }
         }
+        public void deleteOne(car onecar)
+        {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message, "valam nem jo");
+            }
+            connection.Open();
+            string querry = $"delete from {tablename} where id = {onecar.id}";
+            MySqlCommand commadn = new MySqlCommand(querry, connection);
+            commadn.ExecuteNonQuery();
+            commadn.Dispose();
+            connection.Close();
+            MessageBox.Show("deleted one");
+        }
+        
     }
 }
